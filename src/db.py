@@ -57,12 +57,16 @@ CREATE TABLE dispensaciones (
 """
 
 
-def conectar(ruta: Path = RUTA_DB) -> sqlite3.Connection:
+def conectar(ruta: Path | None = None) -> sqlite3.Connection:
     """Abre una conexion a la base y activa las claves foraneas.
 
     sqlite3 no aplica las FOREIGN KEY por defecto; se activan en cada conexion
     para que la integridad se respete en todos los modulos (herramientas, demo).
+
+    La ruta se resuelve al llamar (no al definir) para que los tests puedan
+    apuntar RUTA_DB a una base temporal sin tocar data/recetaya.db.
     """
+    ruta = ruta or RUTA_DB
     ruta.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(ruta)
     # Row permite acceder a las columnas por nombre (fila["estado"]), lo que
@@ -78,9 +82,9 @@ def crear_esquema(conn: sqlite3.Connection) -> None:
     conn.commit()
 
 
-def borrar_bd(ruta: Path = RUTA_DB) -> None:
+def borrar_bd(ruta: Path | None = None) -> None:
     """Elimina el archivo de la base para recargar los datos desde cero.
 
     Se usa en cargar_datos.py y permite repetir la carga de forma idempotente.
     """
-    ruta.unlink(missing_ok=True)
+    (ruta or RUTA_DB).unlink(missing_ok=True)
