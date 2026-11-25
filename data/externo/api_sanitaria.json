@@ -1,0 +1,12 @@
+{
+  "bioequivalentes": {
+    "V": ["W"]
+  },
+  "alertas": [
+    {
+      "principio_activo": "Y",
+      "nivel": "alta",
+      "mensaje": "Alerta sanitaria ficticia: Y requiere receta retenida y no debe combinarse con X."
+    }
+  ]
+}

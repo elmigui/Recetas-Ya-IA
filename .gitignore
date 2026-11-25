@@ -13,10 +13,15 @@ dist/
 # Environment variables
 .env
 .env.*
+!.env.example
 
-# ChromaDB local data
-chroma_db/
-.chroma/
+# Datos generados / locales
+data/recetaya.db
+data/recetaya.db-journal
+data/chroma/
+
+# Enunciado local de la evaluacion (no forma parte del entregable)
+Enunciado.md
 
 # IDE / OS
 .vscode/
